@@ -5,7 +5,7 @@
   "version": "0.0.0",
   "repository": {
     "type": "git",
-    "url": "git@github.com:jaitaiwan/node.md.blog.git"
+    "url": "https://jaitaiwan@github.com/jaitaiwan/node.md.blog.git"
   },
   "main": "app.js",
   "engines": {
