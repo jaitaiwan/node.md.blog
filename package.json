@@ -11,6 +11,11 @@
   "engines": {
     "node": "~0.6.5"
   },
-  "dependencies": {},
+  "dependencies": {
+  	"coffee-script":""
+  },
+  "bin": {
+  	"node.md.blog" : "./app.js"
+  },
   "devDependencies": {}
 }
