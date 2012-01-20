@@ -1,0 +1,16 @@
+{
+  "author": "Daniel J Holmes <dan@djcentric.com> (http://www.djcentric.com/)",
+  "name": "node.md.blog",
+  "description": "node.md.blog is a filesystem based blog that uses *.md for content and integrates with node and express.",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jaitaiwan/node.md.blog.git"
+  },
+  "main": "app.js",
+  "engines": {
+    "node": "~0.6.5"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
