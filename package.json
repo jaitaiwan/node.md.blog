@@ -12,7 +12,10 @@
     "node": "~0.6.5"
   },
   "dependencies": {
-  	"coffee-script":""
+  	"coffee-script": "",
+  	"node-markdown": "",
+  	"express": "",
+  	"eco" : ""
   },
   "bin": {
   	"node.md.blog" : "./app.js"

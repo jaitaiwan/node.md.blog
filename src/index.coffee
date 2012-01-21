@@ -1,3 +1,2 @@
-require '../src/setup'
-
-
+## Load Server
+require '../src/server'
