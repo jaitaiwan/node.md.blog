@@ -15,7 +15,8 @@
   	"coffee-script": "",
   	"node-markdown": "",
   	"express": "",
-  	"eco" : ""
+  	"eco" : "",
+  	"stylus" : ""
   },
   "bin": {
   	"node.md.blog" : "./app.js"
