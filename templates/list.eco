@@ -24,8 +24,11 @@
 	<div id="page" class="container">
 		<div id="content">
 			<div class="post">
-			<h2><%= @Title %></h2>
-			<%- @Post %>
+				<li>
+					<% for file in @files: %>
+						<ul><a href="<%= "/article/#{file[0]}" %>"><%= "#{((file[0].charAt(0).toUpperCase() + file[0][1..]).split('_')).join(' ')}" %></a></ul>
+					<% end %>
+				</li>
 			</div>
 			<!--
 			<div class="post">

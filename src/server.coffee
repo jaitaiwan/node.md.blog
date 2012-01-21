@@ -1,4 +1,6 @@
-server = require('express').createServer()
+express = require 'express'
+server = express.createServer()
+server.use "/images", express.static "./templates/images"
 
 try
   routes = require './router'
