@@ -33,12 +33,6 @@ routes = [
   
   {
     method: "get"
-    matches: "/*:anything"
-    callback: callbacks.e404
-  }
-  
-  {
-    method: "get"
     matches: "/"
     callback: callbacks.list
   }
