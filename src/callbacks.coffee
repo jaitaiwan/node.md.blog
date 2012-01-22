@@ -7,7 +7,7 @@ module.exports =
     for file, i in files
       filestat = fs.statSync "./blogs/#{file}"
       d = new Date(filestat.mtime)
-      list.push [file.slice(0,-3), d]
+      list.push [file.slice(0,-3), d] if file[-3..] is ".md"
       #if i is 5 then break
     list.sort (a,b) ->
       b[1].getTime() - a[1].getTime()
