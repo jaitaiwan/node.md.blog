@@ -72,6 +72,27 @@ module.exports =
         res.header "Content-type", "application/json"
         res.send data
     request.end();
+    
+  profile: (req,res) ->
+    try
+      https = require 'https'
+      opts = 
+        host: "api.github.com"
+        path: "/users/jaitaiwan"
+        method: "GET"
+        
+      request = https.request opts, (resp) ->
+        data = "";
+        resp.setEncoding('utf8');
+        resp.on 'data', (chunk) ->
+          data += chunk;
+        
+        resp.on 'end', ->
+          res.header "Content-type", "application/json"
+          res.send data
+      request.end()
+    catch err
+      console.log err
       
   e404: (req, res, next) ->
     #res.send 'No document here.\n', 404

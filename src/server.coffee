@@ -1,6 +1,7 @@
 express = require 'express'
 server = express.createServer()
 server.use "/images", express.static "./templates/images"
+server.use "/scripts", express.static "./templates/scripts"
 
 try
   routes = require './router'

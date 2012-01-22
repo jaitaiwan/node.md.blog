@@ -27,6 +27,12 @@ routes = [
   
   {
     method: "get"
+    matches: "/github"
+    callback: callbacks.profile
+  }
+  
+  {
+    method: "get"
     matches: "/*:anything"
     callback: callbacks.e404
   }

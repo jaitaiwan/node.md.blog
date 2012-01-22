@@ -57,8 +57,8 @@
 					<p>Mauris vitae nisl nec metus placerat perdiet est. Phasellus dapibus semper consectetuer hendrerit.</p>
 				</li> -->
 				<li>
-					<h2>Projects</h2>
-					<ul>
+					<h2>Github Projects</h2>
+					<ul id="projects">
 						
 					</ul>
 				</li>
@@ -77,12 +77,16 @@
 		</div>
 		<div id="column2">
 			<h2>Social Plugins</h2>
-			<p>Sed lacus. Donec lectus. Nullam pretium nibh ut turpis. Nam bibendum. In nulla tortor, elementum vel, tempor at, varius non, purus. Mauris vitae nisl nec metus consectetuer. Donec ipsum. Proin imperdiet est. Phasellus dapibus semper urna.</p>
+			<div id="github">
+			
+			</div>
 		</div>
 		<div id="column3">
 			<h2>Recommended Links</h2>
 			<ul>
-				
+				<li><a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a></li>
+				<li><a href="http://nodejs.org/">Node.js</a></li>
+				<li><a href="http://expressjs.com">Express.js</a></li>
 			</ul>
 		</div>
 	</div>
@@ -91,5 +95,43 @@
 	<p>Copyright (c) 2012 Daniel J Holmes. All rights reserved. Design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>
 </div>
 <!-- end #footer -->
+<script type="text/javascript" src="/scripts/jquery.min.js"></script>
+<script type="text/javascript">
+$(function () {
+	$.ajax({
+	 url: "/projects",
+	 success: function (data) {
+	  oldData = data;
+	  data = [];
+	  for(i=0;i<oldData.length;i++) {
+	  	if(oldData[i].fork == false) data.push(oldData[i]);
+	  }
+	  data.sort(function(a,b) {
+	  	bt = new Date(b.updated_at);
+	  	at = new Date(a.updated_at);
+	  	return  bt.getTime() - at.getTime();
+	  });
+	  for(i=0;i<data.length;i++) {
+	  	$("#projects").append("<li><a href='" + data[i].html_url + "'>" + data[i].name + "</a></li>");
+	  	if (i==0) console.log(data[i])
+	  	if(i==5) break;
+	  }
+	 }
+	});
+	
+	$.ajax({
+	 url: "/github",
+	 success: function (data) {
+	 	$("#github").html("\
+	 		<img src='http://www.gravatar.com/avatar/"+data.gravatar_id+"' />\
+	 		<h3><a href='http://github.com/"+data.html_url+"'>"+data.login+"</a></h3>\
+	 		<span class='description'>"+data.name+"</span>\
+	 		<span class='description' style='font-style:italic;font-size:10px'>"+data.html_url+"</span>\
+	 		<div style='clear:both'></div>\
+	 	");
+	 }
+	});
+});
+</script>
 </body>
 </html>
