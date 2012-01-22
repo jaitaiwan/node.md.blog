@@ -1,5 +1,4 @@
-				<li>
+					<div class="post"><%- @Latest %></div>
 					<% for file in @files: %>
-						<ul><a href="<%= "/article/#{file[0]}" %>"><%= "#{((file[0].charAt(0).toUpperCase() + file[0][1..]).split('_')).join(' ')}" %></a></ul>
+						<div class="post"><a href="<%= "/article/#{file[0]}" %>"><%= "#{((file[0].charAt(0).toUpperCase() + file[0][1..]).split('_')).join(' ')}" %></a></div>
 					<% end %>
-				</li>

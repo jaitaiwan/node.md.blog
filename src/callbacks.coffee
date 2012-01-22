@@ -1,6 +1,7 @@
 module.exports =
   list: (req, res, next) ->
     fs = require 'fs'
+    md = require('node-markdown').Markdown
     files = fs.readdirSync "./blogs/"
     list = []
     for file, i in files
@@ -12,6 +13,7 @@ module.exports =
       b[1].getTime() - a[1].getTime()
     content = require('../templates/list')
       files: list
+      Latest: md fs.readFileSync "./blogs/#{list[0][0]}.md", 'utf8'
     template = require '../templates/template'
     res.send template
       Title: "Home"
@@ -56,25 +58,60 @@ module.exports =
       
     
   repos: (requ, res, next) ->
-    https = require 'https'
-    opts = 
-      host: "api.github.com"
-      path: "/users/jaitaiwan/repos"
-      method: "GET"
-      
-    request = https.request opts, (resp) ->
-      data = "";
-      resp.setEncoding('utf8');
-      resp.on 'data', (chunk) ->
-        data += chunk;
-      
-      resp.on 'end', ->
-        res.header "Content-type", "application/json"
-        res.send data
-    request.end();
+    fs = require 'fs'
+    saveToCache = (data) ->
+      try
+        fs.readdirSync "./cache/"
+      catch err
+        fs.mkdirSync "./cache"
+      fs.writeFileSync './cache/repos.json', data
+    
+    cachefile = './cache/repos.json'
+    try
+      stat = fs.statSync cachefile
+    catch err
+      stat = false
+    now = new Date()
+    now = now.getTime()
+    if not stat? or not stat?.isFile() or ((now - stat?.mtime.getTime()) > 3600000)
+      https = require 'https'
+      opts = 
+        host: "api.github.com"
+        path: "/users/jaitaiwan/repos"
+        method: "GET"
+      request = https.request opts, (resp) ->
+        data = "";
+        resp.setEncoding('utf8');
+        resp.on 'data', (chunk) ->
+          data += chunk;
+        
+        resp.on 'end', ->
+          saveToCache data
+          res.header "Content-type", "application/json"
+          res.send data
+      request.end();
+    else
+      res.header "Content-type", "application/json"
+      res.send fs.readFileSync cachefile, 'utf8'
     
   profile: (req,res) ->
+    fs = require 'fs'
+    saveToCache = (data) ->
+      try
+        fs.readdirSync "./cache/"
+      catch err
+        fs.mkdirSync "./cache"
+      fs.writeFileSync './cache/profile.json', data
+      
+    cachefile = './cache/profile.json'
     try
+      stat = fs.statSync cachefile
+    catch err
+      stat = false
+      
+    now = new Date()
+    now = now.getTime()
+    if not stat? or not stat?.isFile() or ((now - stat?.mtime.getTime()) > 3600000)
       https = require 'https'
       opts = 
         host: "api.github.com"
@@ -88,11 +125,13 @@ module.exports =
           data += chunk;
         
         resp.on 'end', ->
+          saveToCache data
           res.header "Content-type", "application/json"
           res.send data
       request.end()
-    catch err
-      console.log err
+    else
+      res.header "Content-type", "application/json"
+      res.send fs.readFileSync cachefile, 'utf8'
       
   e404: (req, res, next) ->
     #res.send 'No document here.\n', 404
