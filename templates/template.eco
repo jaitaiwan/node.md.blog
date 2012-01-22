@@ -77,7 +77,12 @@
 	<div id="footer-bg">
 		<div id="column1">
 			<h2>Site Map</h2>
-			<p>In posuere eleifend odio quisque semper augue mattis wisi maecenas ligula. Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum. Quisque dictum integer nisl risus, sagittis convallis, rutrum id, congue, and nibh.</p>
+			<ul>
+				<li><a href="/">Home</a></li>
+				<li>5 most recent articles
+					<ul><%- @Sidebar %></ul>
+				</li>
+			</ul>
 		</div>
 		<div id="column2">
 			<h2>Social Plugins</h2>

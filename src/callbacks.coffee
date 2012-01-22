@@ -1,16 +1,21 @@
+blogList = (index = 0, total = 5)->
+  fs = require 'fs'
+  files = fs.readdirSync "./blogs/"
+  list = []
+  for file, i in files
+    filestat = fs.statSync "./blogs/#{file}"
+    d = new Date(filestat.mtime)
+    list.push [file.slice(0,-3), d] if file[-3..] is ".md"
+    #if i is 5 then break
+  list.sort (a,b) ->
+    b[1].getTime() - a[1].getTime()
+  list.splice index, total
+
 module.exports =
   list: (req, res, next) ->
     fs = require 'fs'
     md = require('node-markdown').Markdown
-    files = fs.readdirSync "./blogs/"
-    list = []
-    for file, i in files
-      filestat = fs.statSync "./blogs/#{file}"
-      d = new Date(filestat.mtime)
-      list.push [file.slice(0,-3), d] if file[-3..] is ".md"
-      #if i is 5 then break
-    list.sort (a,b) ->
-      b[1].getTime() - a[1].getTime()
+    list = blogList()
     content = require('../templates/list')
       files: list
     template = require '../templates/template'
@@ -37,6 +42,8 @@ module.exports =
         res.send template
           Title: title
           Content: content
+          Sidebar: require('../templates/list')
+            files: blogList()
     catch err
       res.send "Page cannot be found", 404
       console.error "Client requested '" + req.params.document + "' which cannot be found.", err
