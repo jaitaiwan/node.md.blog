@@ -70,7 +70,7 @@ module.exports =
     try
       stat = fs.statSync cachefile
     catch err
-      stat = false
+      
     now = new Date()
     now = now.getTime()
     if not stat? or not stat?.isFile() or ((now - stat?.mtime.getTime()) > 3600000)
@@ -107,7 +107,6 @@ module.exports =
     try
       stat = fs.statSync cachefile
     catch err
-      stat = false
       
     now = new Date()
     now = now.getTime()
