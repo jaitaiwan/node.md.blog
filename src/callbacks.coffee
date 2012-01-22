@@ -13,11 +13,11 @@ module.exports =
       b[1].getTime() - a[1].getTime()
     content = require('../templates/list')
       files: list
-      Latest: md fs.readFileSync "./blogs/#{list[0][0]}.md", 'utf8'
     template = require '../templates/template'
     res.send template
       Title: "Home"
-      Content: content
+      Content: md fs.readFileSync "./blogs/#{list[0][0]}.md", 'utf8'
+      Sidebar: content
     
       
   

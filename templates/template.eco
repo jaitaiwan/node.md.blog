@@ -61,6 +61,11 @@
 						
 					</ul>
 				</li>
+				<li><% if @Sidebar?: %>
+						<h2>Recent Posts</h2>
+						<ul><%- @Sidebar %></ul>
+					<% end %>
+				</li>
 			</ul>
 		</div>
 		<!-- end #sidebar -->
