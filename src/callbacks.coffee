@@ -10,9 +10,12 @@ module.exports =
       #if i is 5 then break
     list.sort (a,b) ->
       b[1].getTime() - a[1].getTime()
-    template = require '../templates/list'
-    res.send template
+    content = require('../templates/list')
       files: list
+    template = require '../templates/template'
+    res.send template
+      Title: "Home"
+      Content: content
     
       
   
@@ -24,13 +27,17 @@ module.exports =
       filestat = fs.statSync filename
       if filestat.isFile()
         document = fs.readFileSync filename, 'utf8'
-        template = require '../templates/blog'
-        res.send template
-          Title: req.params.document
+        title = "#{((req.params.document.charAt(0).toUpperCase() + req.params.document[1..]).split('_')).join(' ')}"
+        template = require '../templates/template'
+        content = require('../templates/blog')
+          Title: title
           Post: md(document)
+        res.send template
+          Title: title
+          Content: content
     catch err
       res.send "Page cannot be found", 404
-      console.error "Client requested '" + req.params.document + "' which cannot be found."
+      console.error "Client requested '" + req.params.document + "' which cannot be found.", err
       
   css: (req, res, next) ->
     fs = require 'fs'
