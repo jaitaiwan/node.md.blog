@@ -19,7 +19,7 @@
   	"stylus" : ""
   },
   "bin": {
-  	"node.md.blog" : "./app.js"
+  	"node-md-blog" : "bin/app.js"
   },
   "devDependencies": {}
 }
