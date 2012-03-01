@@ -24,7 +24,7 @@ category = (name) ->
     files = fs.readdirSync "./blogs/"
     list = []
     for file, i in files
-      filestat = fs.statSync "../blogs/#{file}"
+      filestat = fs.statSync "./blogs/#{file}"
       d = new Date(filestat.mtime)
       list.push [file.slice(0,-3), d] if file[-3..] is ".md" and regex.test(file)
     list.sort (a,b) ->
