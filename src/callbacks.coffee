@@ -29,7 +29,9 @@ category = (name) ->
       list.push [file.slice(0,-3), d] if file[-3..] is ".md" and regex.test(file)
     list.sort (a,b) ->
       b[1].getTime() - a[1].getTime()
-    list.splice index, total 
+    list.splice index, total
+  catch err
+    console.error err 
     
 
 module.exports =
