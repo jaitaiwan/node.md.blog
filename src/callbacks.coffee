@@ -1,9 +1,9 @@
 blogList = (index = 0, total = 5) ->
   fs = require 'fs'
-  files = fs.readdirSync "../blogs/"
+  files = fs.readdirSync "./blogs/"
   list = []
   for file, i in files
-    filestat = fs.statSync "../blogs/#{file}"
+    filestat = fs.statSync "./blogs/#{file}"
     d = new Date(filestat.mtime)
     list.push [file.slice(0,-3), d] if file[-3..] is ".md"
     if i is total then break
@@ -13,15 +13,15 @@ blogList = (index = 0, total = 5) ->
 
 categoryList = (max = 5) ->
   try
-    categories = require '../posts/categories.coffee'
+    categories = require './posts/categories.coffee'
   return categories?[0..max]
 
 category = (name) ->
   try
-    categories = require '../posts/categories.coffee'
+    categories = require './posts/categories.coffee'
     regex = categories[name]
     fs = require 'fs'
-    files = fs.readdirSync "../blogs/"
+    files = fs.readdirSync "./blogs/"
     list = []
     for file, i in files
       filestat = fs.statSync "../blogs/#{file}"
@@ -37,12 +37,12 @@ module.exports =
     fs = require 'fs'
     md = require('node-markdown').Markdown
     list = blogList()
-    content = require('../templates/list')
+    content = require '../templates/list'
       files: list
     template = require '../templates/template'
     res.send template
       Title: "Home"
-      Content: md fs.readFileSync "../blogs/#{list[0][0]}.md", 'utf8'
+      Content: md fs.readFileSync "./blogs/#{list[0][0]}.md", 'utf8'
       Sidebar: content
       TopNav: categoryList()
     
@@ -52,7 +52,7 @@ module.exports =
     fs = require 'fs'
     md = require('node-markdown').Markdown
     try
-      filename = "../blogs/#{req.params.document}.md"
+      filename = "./blogs/#{req.params.document}.md"
       filestat = fs.statSync filename
       if filestat.isFile()
         document = fs.readFileSync filename, 'utf8'
@@ -73,7 +73,7 @@ module.exports =
       
   css: (req, res, next) ->
     fs = require 'fs'
-    filename = "../templates/#{req.params.document}.styl"
+    filename = "./templates/#{req.params.document}.styl"
     try
       stat = fs.statSync filename
     catch err
@@ -91,12 +91,12 @@ module.exports =
     fs = require 'fs'
     saveToCache = (data) ->
       try
-        fs.readdirSync "../cache/"
+        fs.readdirSync "./cache/"
       catch err
-        fs.mkdirSync "../cache"
-      fs.writeFileSync '../cache/repos.json', data
+        fs.mkdirSync "./cache"
+      fs.writeFileSync './cache/repos.json', data
     
-    cachefile = '../cache/repos.json'
+    cachefile = './cache/repos.json'
     try
       stat = fs.statSync cachefile
     catch err
@@ -128,12 +128,12 @@ module.exports =
     fs = require 'fs'
     saveToCache = (data) ->
       try
-        fs.readdirSync "../cache/"
+        fs.readdirSync "./cache/"
       catch err
-        fs.mkdirSync "../cache"
-      fs.writeFileSync '../cache/profile.json', data
+        fs.mkdirSync "./cache"
+      fs.writeFileSync './cache/profile.json', data
       
-    cachefile = '../cache/profile.json'
+    cachefile = './cache/profile.json'
     try
       stat = fs.statSync cachefile
     catch err
