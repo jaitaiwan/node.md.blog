@@ -13,7 +13,9 @@ blogList = (index = 0, total = 5) ->
 
 categoryList = (max = 5) ->
   try
-    categories = require './posts/categories.coffee'
+    categories = require '../posts/categories.coffee'
+  catch err
+    console.error err
   return categories?[0..max]
 
 category = (name) ->
