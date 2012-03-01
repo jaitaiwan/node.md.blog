@@ -37,7 +37,7 @@ module.exports =
     fs = require 'fs'
     md = require('node-markdown').Markdown
     list = blogList()
-    content = require '../templates/list'
+    content = require('../templates/list')
       files: list
     template = require '../templates/template'
     res.send template
