@@ -33,6 +33,12 @@ routes = [
   
   {
     method: "get"
+    matches: "/categories/:category"
+    callback: callbacks.categories
+  }
+
+  {
+    method: "get"
     matches: "/"
     callback: callbacks.list
   }
