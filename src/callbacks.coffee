@@ -16,7 +16,7 @@ categoryList = (max = 5) ->
     categories = require '../posts/categories.coffee'
   catch err
     console.error err
-  return categories?[0..max]
+  return categories
 
 category = (name) ->
   try
