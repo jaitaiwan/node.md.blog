@@ -3,6 +3,6 @@
 *.pyo
 .project
 .settings
-
+*.swp
 node_modules
 cache

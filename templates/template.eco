@@ -17,6 +17,9 @@
 		<div id="menu">
 			<ul>
 				<li class="current_page_item"><a href="/">Homepage</a></li>
+				<% if category? then for category in @TopNav: %>
+					<li><a href="/categories/<%- category %>"><%- category[0..1].toUpperCase() + category[1..] %></a></li>
+				<% end %>
 			</ul>
 		</div>
 	</div>

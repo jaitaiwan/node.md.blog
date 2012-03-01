@@ -18,7 +18,7 @@ categoryList = (max = 5) ->
 
 category = (name) ->
   try
-    categories = require './posts/categories.coffee'
+    categories = require '../posts/categories.coffee'
     regex = categories[name]
     fs = require 'fs'
     files = fs.readdirSync "./blogs/"
