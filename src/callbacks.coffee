@@ -58,7 +58,7 @@ module.exports =
         document = fs.readFileSync filename, 'utf8'
         title = "#{((req.params.document.charAt(0).toUpperCase() + req.params.document[1..]).split('_')).join(' ')}"
         template = require '../templates/template'
-        content = require '../templates/blog'
+        content = require('../templates/blog')
           Title: title
           Post: md(document)
         res.send template
