@@ -44,9 +44,13 @@ module.exports =
     content = require('../templates/list')
       files: list
     template = require '../templates/template'
+    aritcle = fs.readFileSync "./blogs/#{list[0][0]}.md", 'utf8'
+    article = article[0..300]
+    article = article.replace /\w+$/, ''
+    article = article + "...<hr><a href='/blogs/#{list[0][0]}'>Read More >></a>"
     res.send template
       Title: "Home"
-      Content: md fs.readFileSync "./blogs/#{list[0][0]}.md", 'utf8'
+      Content: md 
       Sidebar: content
       TopNav: categoryList()
     
