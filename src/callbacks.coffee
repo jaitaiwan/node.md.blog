@@ -14,13 +14,14 @@ blogList = (index = 0, total = 5) ->
 categoryList = (max = 5) ->
   try
     categories = require '../posts/categories.coffee'
+    categories
   catch err
     console.error err
-  return categories
+    {}
 
 category = (name) ->
   try
-    categories = require '../posts/categories.coffee'
+    categories = categoryList()
     regex = categories[name]
     fs = require 'fs'
     files = fs.readdirSync "./blogs/"
@@ -47,10 +48,10 @@ module.exports =
     article = fs.readFileSync "./blogs/#{list[0][0]}.md", 'utf8'
     article = article[0..300]
     article = article.replace /\w+$/, ''
-    article = article + "...<hr><a href='/blogs/#{list[0][0]}'>Read More >></a>"
+    article = article + "...<hr><a href='/article/#{list[0][0]}'>Read More >></a>"
     res.send template
       Title: "Home"
-      Content: md 
+      Content: md article
       Sidebar: content
       TopNav: categoryList()
     
@@ -117,6 +118,9 @@ module.exports =
         host: "api.github.com"
         path: "/users/jaitaiwan/repos"
         method: "GET"
+        headers:
+          "Accept": "application/vnd.github.v3+json"
+          "User-Agent": "jaitaiwan"
       request = https.request opts, (resp) ->
         data = "";
         resp.setEncoding('utf8');
@@ -154,6 +158,9 @@ module.exports =
         host: "api.github.com"
         path: "/users/jaitaiwan"
         method: "GET"
+        headers:
+          "Accept": "application/vnd.github.v3+json"
+          "User-Agent": "jaitaiwan"
         
       request = https.request opts, (resp) ->
         data = "";

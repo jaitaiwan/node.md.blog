@@ -134,7 +134,7 @@ $(function () {
 	 url: "/github",
 	 success: function (data) {
 	 	$("#github").html("\
-	 		<img src='http://www.gravatar.com/avatar/"+data.gravatar_id+"' />\
+	 		<img src='"+data.avatar_url+"&s=64' />\
 	 		<h3><a href='http://github.com/"+data.html_url+"'>"+data.login+"</a></h3>\
 	 		<span class='description'>"+data.name+"</span>\
 	 		<span class='description' style='font-style:italic;font-size:10px'>"+data.html_url+"</span>\

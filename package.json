@@ -2,15 +2,12 @@
   "author": "Daniel J Holmes <dan@djcentric.com> (http://www.djcentric.com/)",
   "name": "node.md.blog",
   "description": "node.md.blog is a filesystem based blog that uses *.md for content and integrates with node and express.",
-  "version": "0.1.4-alpha",
+  "version": "0.1.4-rc1",
   "repository": {
     "type": "git",
     "url": "https://jaitaiwan@github.com/jaitaiwan/node.md.blog.git"
   },
   "main": "app.js",
-  "engines": {
-    "node": "~0.6.5"
-  },
   "dependencies": {
   	"coffee-script": "",
   	"node-markdown": "",
